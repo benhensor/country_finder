@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Header from './components/header/Header'
+import Home from './components/home/Home'
+import Country from './components/country/Country'
+import Footer from './components/footer/Footer'
+import { Routes, Route } from 'react-router-dom'
+import './App.css'
 
 function App() {
+
+
+  const [countries, setCountries] = useState([])
+
+
+  async function getCountryData() {
+    const response = await fetch('https://restcountries.com/v3.1/all')
+    const data = await response.json()
+
+    setCountries(data)
+  }
+
+  useEffect(() => {
+    getCountryData()
+  }, [])
+
+  // useEffect(() => {
+  //   console.log(countries)
+  // }, [countries])
+
+  // useEffect(() => {
+  //   console.log(isHovered)
+  // }, [isHovered])
+
+
+  function handleClick(country) {
+    console.log(country, 'clicked')
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="app">
+      <Header />
+      <div className="app-content">
+        <Routes>
+        <Route exact path="/" element={<Home countries={countries} handleClick={handleClick} />} /> 
+        <Route exact path="country" element={<Country />} />
+        </Routes>
+      </div>
+      <Footer />
+
+    </main>
   );
 }
 
