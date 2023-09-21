@@ -1,0 +1,27 @@
+nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.search-container {
+  min-width: 350px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+nav input {
+  padding: 0 10px;
+  border: none;
+}
+
+nav img {
+  position: absolute;
+  right: 0;
+
+  width: 40px;
+}
